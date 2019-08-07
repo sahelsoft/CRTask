@@ -46,19 +46,16 @@ public class chatNoirRequest {
 
             JSONObject jsonObject = new JSONObject(responseString);
             JSONArray jsonArray=null;
-            if (jsonObject!=null)
-                if (jsonObject.has("results"))
-                    jsonArray= jsonObject.getJSONArray("results");
-                else
-                    return true;
-
+            if (jsonObject.has("results"))
+                jsonArray= jsonObject.getJSONArray("results");
+     
             Map<String,String> curQueryRes=new HashMap<>();
             for(int x = 0; x < jsonArray.length(); x++){
                 String uuid=jsonArray.getJSONObject(x).getString("uuid");
                 if (!relDoc.contains(uuid)) {
                     relDoc.add(uuid);
                     getRelatedDoc(uuid);
-				}
+		}
                 System.out.println("%%%%%%%%%%%%%%%%%%%%%%%");
             }
             return true;
